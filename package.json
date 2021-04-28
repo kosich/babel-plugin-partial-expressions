@@ -1,0 +1,22 @@
+{
+  "name": "babel-partial-expressions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/helper-plugin-test-runner": "^7.13.10",
+    "@babel/helper-plugin-utils": "^7.13.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "chokidar-cli": "^2.1.0",
+    "nodemon": "^2.0.7"
+  }
+}
