@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js\""
+    "dev": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js\"",
+    "build": "babel --quiet ./index.js",
+    "run": "chokidar \"plugin/*.js\" \"index.js\" --initial --quiet -c \"babel ./index.js | node -\""
   },
   "keywords": [],
   "author": "",
