@@ -4,8 +4,8 @@
   "description": "Partial expressions experimental plugin",
   "main": "src/index.js",
   "scripts": {
-    "dev": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js\"",
-    "autorun": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js | node -\"",
+    "dev": "chokidar \"ts-src/*.js\" \"test.js\" --initial -c \"npm run plugin && babel ./test.js\"",
+    "autorun": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js | node -\"",
     "build": "babel --quiet ./index.js",
     "exec": "npm run --silent build | node -",
     "plugin": "tsc -p ."
