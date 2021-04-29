@@ -1,15 +1,13 @@
-// @ts-check
+import { NodePath, types, PluginObj } from '@babel/core';
+import { Identifier, BinaryExpression } from '@babel/types';
+import { VisitNode } from '@babel/traverse';
 
-/** @type {string} */
-const pipeOperatorSigil = '|>';
 
-/** @type {string} */
-const placeholderSigil = '_';
+const pipeOperatorSigil: string = '|>';
+const placeholderSigil: string = '_';
 
-/** @param { { types: babel.types } } param0 */
-function plugin ({ types: t }) {
-  /** @type { import('@babel/traverse').VisitNode<any, babel.types.BinaryExpression> }*/
-  let BinaryExpression = (path) => {
+export default function BabelPluginPartialExpressions ({ types: t }: { types: typeof types }) {
+  let BinaryExpression: VisitNode<any, BinaryExpression> = (path) => {
     if (path.node.operator != pipeOperatorSigil) {
       return;
     }
@@ -19,8 +17,7 @@ function plugin ({ types: t }) {
     path.get('right').traverse({ Identifier });
   };
 
-  /** @type { import('@babel/traverse').VisitNode<any, babel.types.Identifier> }*/
-  let Identifier = (path) => {
+  let Identifier: VisitNode<any, Identifier> = (path) => {
     let { scope, node } = path;
 
     if (node.name != placeholderSigil) {
@@ -30,7 +27,6 @@ function plugin ({ types: t }) {
     let tempUid = scope.generateUidIdentifier();
     path.replaceWith(tempUid);
 
-    /** @type { import('@babel/core').NodePath<any> } */
     let parentPath = path.findParent(path => {
       let parent = path.parentPath;
 
@@ -38,7 +34,7 @@ function plugin ({ types: t }) {
         || (parent.isBinaryExpression() && parent.node.operator == pipeOperatorSigil)
         || parent.isArrowFunctionExpression()
         || parent.isFunctionExpression()
-    });
+    }) as NodePath<any>;
 
     parentPath.replaceWith(
       t.parenthesizedExpression(
@@ -47,15 +43,11 @@ function plugin ({ types: t }) {
     );
   }
 
-  /** @type {import('@babel/core').PluginObj} */
-  let config = {
+  let config: PluginObj = {
     visitor: {
-      BinaryExpression,
-      // Identifier
+      BinaryExpression
     }
   };
 
   return config;
 }
-
-module.exports = plugin;

@@ -1,28 +1,36 @@
 {
-  "name": "babel-partial-expressions",
+  "name": "@kosich/plugin-proposal-partial-expressions",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Partial expressions experimental plugin",
+  "main": "src/index.js",
   "scripts": {
     "dev": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js\"",
     "autorun": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js | node -\"",
     "build": "babel --quiet ./index.js",
-    "exec": "npm run --silent build | node -"
+    "exec": "npm run --silent build | node -",
+    "plugin": "tsc -p ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "author": "Kostia Palchyk",
+  "license": "MIT",
+  "peerDependencies": {
+    "@babel/core": "^7.13.16"
+  },
   "dependencies": {
     "@babel/helper-plugin-test-runner": "^7.13.10",
     "@babel/helper-plugin-utils": "^7.13.0"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.1.14",
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.13.16",
     "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
     "@babel/plugin-syntax-pipeline-operator": "^7.12.13",
     "@babel/traverse": "^7.13.17",
     "chokidar-cli": "^2.1.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.4"
   }
 }
