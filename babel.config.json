@@ -1,3 +1,12 @@
 {
-  "plugins": ["./plugin"]
+  "plugins":
+  [
+    "./plugin"
+    , [
+      "@babel/plugin-proposal-pipeline-operator",
+      {
+        "proposal": "minimal"
+      }
+    ]
+  ]
 }

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js\"",
+    "autorun": "chokidar \"plugin/*.js\" \"index.js\" --initial -c \"babel ./index.js | node -\"",
     "build": "babel --quiet ./index.js",
-    "run": "chokidar \"plugin/*.js\" \"index.js\" --initial --quiet -c \"babel ./index.js | node -\""
+    "exec": "npm run --silent build | node -"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,9 @@
   "devDependencies": {
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.13.16",
+    "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
+    "@babel/plugin-syntax-pipeline-operator": "^7.12.13",
+    "@babel/traverse": "^7.13.17",
     "chokidar-cli": "^2.1.0",
     "nodemon": "^2.0.7"
   }

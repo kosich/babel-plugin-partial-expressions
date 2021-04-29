@@ -1,4 +1,3 @@
-let logger = console.log(_ + 42);
-
-logger('Shmaets: ');
-
+42
+  |> _ + '!'
+  |> console.log(_)
