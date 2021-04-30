@@ -2,4 +2,4 @@ ts-src
 node_modules
 babel.config.json
 test.js
-tsconfig.js
+tsconfig.json

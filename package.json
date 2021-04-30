@@ -19,19 +19,18 @@
   "peerDependencies": {
     "@babel/core": "^7.13.16"
   },
-  "dependencies": {
-    "@babel/helper-plugin-test-runner": "^7.13.10",
-    "@babel/helper-plugin-utils": "^7.13.0"
-  },
   "devDependencies": {
-    "@types/babel__core": "^7.1.14",
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.13.16",
+    "@babel/helper-plugin-test-runner": "^7.13.10",
+    "@babel/helper-plugin-utils": "^7.13.0",
     "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
     "@babel/plugin-syntax-pipeline-operator": "^7.12.13",
     "@babel/traverse": "^7.13.17",
+    "@types/babel__core": "^7.1.14",
     "chokidar-cli": "^2.1.0",
     "nodemon": "^2.0.7",
+    "np": "^7.5.0",
     "typescript": "^4.2.4"
   }
 }
