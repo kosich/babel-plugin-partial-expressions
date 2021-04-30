@@ -2,10 +2,18 @@
   "name": "@kosich/babel-plugin-partial-expressions-experiment",
   "version": "0.0.1",
   "description": "Partial expressions experimental babel plugin",
-  "main": "src/index.js",
+  "homepage": "https://github.com/kosich/babel-plugin-partial-expressions#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosich/babel-plugin-partial-expressions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kosich/babel-plugin-partial-expressions/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
+  "main": "src/index.js",
   "scripts": {
     "dev": "chokidar \"ts-src/*.ts\" \"test.js\" --initial -c \"npm run plugin && babel ./test.js\"",
     "devjs": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js\"",
