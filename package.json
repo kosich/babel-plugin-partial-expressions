@@ -1,13 +1,14 @@
 {
-  "name": "@kosich/plugin-proposal-partial-expressions",
+  "name": "@kosich/babel-plugin-partial-expressions-experiment",
   "version": "1.0.0",
-  "description": "Partial expressions experimental plugin",
+  "description": "Partial expressions experimental babel plugin",
   "main": "src/index.js",
   "scripts": {
-    "dev": "chokidar \"ts-src/*.js\" \"test.js\" --initial -c \"npm run plugin && babel ./test.js\"",
-    "autorun": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js | node -\"",
-    "build": "babel --quiet ./index.js",
-    "exec": "npm run --silent build | node -",
+    "dev": "chokidar \"ts-src/*.ts\" \"test.js\" --initial -c \"npm run plugin && babel ./test.js\"",
+    "devjs": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js\"",
+    "transpile": "babel --quiet ./index.js",
+    "execute": "npm run --silent transpile | node -",
+    "autoexecute": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js | node -\"",
     "plugin": "tsc -p ."
   },
   "keywords": [
