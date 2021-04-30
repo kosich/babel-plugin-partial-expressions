@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Partial expressions experimental babel plugin",
   "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "chokidar \"ts-src/*.ts\" \"test.js\" --initial -c \"npm run plugin && babel ./test.js\"",
     "devjs": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js\"",
