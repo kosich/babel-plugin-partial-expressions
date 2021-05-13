@@ -1,5 +1,5 @@
 import { NodePath, types, PluginObj } from '@babel/core';
-import { Identifier, BinaryExpression } from '@babel/types';
+import { Identifier, Expression, BinaryExpression } from '@babel/types';
 import { VisitNode } from '@babel/traverse';
 
 
@@ -40,21 +40,20 @@ export default function BabelPluginPartialExpressions ({ types: t }: { types: ty
 
     // find the level where we substitute the expression
     // let parent = path.parentPath as NodePath<any>;
-    let parentPath = path.findParent(parentPath => {
-      let grandpa = parentPath.parentPath;
+    let replacePoint =
+        isValidReplacePoint(path)
+      ? path
+      : findReplacePoint(path)
+      ;
 
-      return !grandpa.isExpression()
-        || grandpa.isArrowFunctionExpression()
-        || grandpa.isFunctionExpression()
-        || (grandpa.isBinaryExpression() && grandpa.node.operator == pipeOperatorSigil && grandpa.get('right') == parentPath)
-    }) as NodePath<any>;
-
-    parentPath.replaceWith(
+    replacePoint.replaceWith(
       t.parenthesizedExpression(
-        t.arrowFunctionExpression([tempUid],
+        t.arrowFunctionExpression(
+          [tempUid],
           t.parenthesizedExpression(
-            parentPath.node
-          ))
+            replacePoint.node
+          )
+        )
       )
     );
   }
@@ -67,4 +66,18 @@ export default function BabelPluginPartialExpressions ({ types: t }: { types: ty
   };
 
   return config;
+}
+
+function findReplacePoint(path: NodePath<Expression>) {
+  return path.findParent(isValidReplacePoint) as NodePath<any>
+}
+
+function isValidReplacePoint(parent: NodePath<types.Node>): boolean {
+  let grandpa = parent.parentPath;
+  return (
+       !grandpa.isExpression()
+    || grandpa.isArrowFunctionExpression()
+    || grandpa.isFunctionExpression()
+    || (grandpa.isBinaryExpression() && grandpa.node.operator == pipeOperatorSigil && grandpa.get('right') == parent)
+  );
 }

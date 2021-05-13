@@ -15,9 +15,9 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "dev": "chokidar \"ts-src/*.ts\" \"test.js\" --initial -c \"npm run plugin && babel ./test.js\"",
+    "dev": "chokidar \"ts-src/*.ts\" --initial -c \"npm run plugin\" & chokidar \"src/*.js\" \"test.js\" -c \"babel ./test.js\"",
     "devjs": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js\"",
-    "transpile": "babel --quiet ./index.js",
+    "transpile": "babel --quiet ./test.js",
     "execute": "npm run --silent transpile | node -",
     "autoexecute": "chokidar \"src/*.js\" \"test.js\" --initial -c \"babel ./test.js | node -\"",
     "plugin": "tsc -p .",

@@ -29,14 +29,10 @@ function BabelPluginPartialExpressions({ types: t }) {
         path.replaceWith(tempUid);
         // find the level where we substitute the expression
         // let parent = path.parentPath as NodePath<any>;
-        let parentPath = path.findParent(parentPath => {
-            let grandpa = parentPath.parentPath;
-            return !grandpa.isExpression()
-                || grandpa.isArrowFunctionExpression()
-                || grandpa.isFunctionExpression()
-                || (grandpa.isBinaryExpression() && grandpa.node.operator == pipeOperatorSigil && grandpa.get('right') == parentPath);
-        });
-        parentPath.replaceWith(t.parenthesizedExpression(t.arrowFunctionExpression([tempUid], t.parenthesizedExpression(parentPath.node))));
+        let replacePoint = isValidReplacePoint(path)
+            ? path
+            : findReplacePoint(path);
+        replacePoint.replaceWith(t.parenthesizedExpression(t.arrowFunctionExpression([tempUid], t.parenthesizedExpression(replacePoint.node))));
     };
     let config = {
         visitor: {
@@ -47,3 +43,13 @@ function BabelPluginPartialExpressions({ types: t }) {
     return config;
 }
 exports.default = BabelPluginPartialExpressions;
+function findReplacePoint(path) {
+    return path.findParent(isValidReplacePoint);
+}
+function isValidReplacePoint(parent) {
+    let grandpa = parent.parentPath;
+    return (!grandpa.isExpression()
+        || grandpa.isArrowFunctionExpression()
+        || grandpa.isFunctionExpression()
+        || (grandpa.isBinaryExpression() && grandpa.node.operator == pipeOperatorSigil && grandpa.get('right') == parent));
+}
