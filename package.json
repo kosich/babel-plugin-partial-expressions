@@ -1,6 +1,6 @@
 {
   "name": "@kosich/babel-plugin-partial-expressions-experiment",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Partial expressions experimental babel plugin",
   "homepage": "https://github.com/kosich/babel-plugin-partial-expressions#readme",
   "repository": {
